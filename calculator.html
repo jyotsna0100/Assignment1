@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            border: 1px solid #000;
+            width: 240px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+
+        .output {
+            text-align: right;
+            padding: 10px;
+            border-bottom: 1px solid #000;
+            width: 50%;
+        }
+        .ac {
+            background-color: #50e6c3;
+        }
+
+        .oprtaters {
+            background-color: #8d968e;
+        }
+        .top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #000;
+        }
+
+        .top-row input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            background-color: white;
+            color: black;
+            border: none;
+        }
+
+        button {
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            flex: 0 0 50px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            background-color: white;
+            color: black;
+        }
+
+        .number {
+            background-color: black;
+            color: white;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        button {
+            border: none;
+            background: #e4e4e4;
+            padding: 10px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+        }
+
+        button:hover {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="top-row">
+            <input type="text" id="result" value="0">
+            <button class="ac" onclick="clearInput()">AC</button>
+        </div>
+        <div class="buttons">
+            <button onclick="appendToInput('7')">7</button>
+            <button onclick="appendToInput('8')">8</button>
+            <button onclick="appendToInput('9')">9</button>
+            <button class="oprtaters" onclick="appendToInput('+')">+</button>
+            <button onclick="appendToInput('4')">4</button>
+            <button onclick="appendToInput('5')">5</button>
+            <button onclick="appendToInput('6')">6</button>
+            <button class="oprtaters" onclick="appendToInput('-')">-</button>
+            <button onclick="appendToInput('1')">1</button>
+            <button onclick="appendToInput('2')">2</button>
+            <button onclick="appendToInput('3')">3</button>
+            <button class="oprtaters" onclick="appendToInput('*')"></button>
+            <button onclick="appendToInput('0')">0</button>
+            <button onclick="appendToInput('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+            <button class="oprtaters" onclick="appendToInput('/')">/</button>
+        </div>
+    </div>
+    <script>
+        let input = '';
+        let result = '0';
+
+        function appendToInput(value) {
+            if (result !== '0') {
+                input = result;
+                result = '0';
+            }
+            input += value;
+            document.getElementById('result').value = input;
+        }
+
+        function clearInput() {
+            input = '';
+            result = '0';
+            document.getElementById('result').value = result;
+        }
+
+        function calculateResult() {
+            try {
+                result = eval(input).toString();
+                document.getElementById('result').value = result;
+            } catch (error) {
+                document.getElementById('result').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>

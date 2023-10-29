@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Reversal and Descending Sort</title>
+</head>
+<body>
+    <div>
+        <h2>Word Reversal</h2>
+        <input type="text" id="inputSentence" placeholder="Enter a sentence">
+        <button onclick="reverseWords()">Reverse</button>
+        <p id="reversedSentence"></p>
+    </div>
+    
+    <div>
+        <h2>Descending Sort</h2>
+        <input type="text" id="inputNumbers" placeholder="Enter numbers(comma-separated)">
+        <button onclick="sortDescending()">Sort</button>
+        <p id="sortedDescending"></p>
+    </div>
+
+    <script>
+        function reverseWords() {
+            const inputSentence = document.getElementById('inputSentence').value;
+            const reversedSentence = inputSentence.split(' ').map(word => word.split('').reverse().join('')).join(' ');
+            document.getElementById('reversedSentence').textContent = "Reversed Sentence: " + reversedSentence;
+        }
+
+        function sortDescending() {
+            const inputNumbers = document.getElementById('inputNumbers').value;
+            const numbersArray = inputNumbers.split(',').map(Number); // Convert to numbers
+            numbersArray.sort((a, b) => b - a);
+            document.getElementById('sortedDescending').textContent = "Sorted Descending: " + numbersArray.join(', ');
+        }
+    </script>
+</body>
+</html>

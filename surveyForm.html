@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Survey Form</title>
+    <style>
+        body {
+            background-color: #4287f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #surveyForm {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        label {
+            width: 120px;
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+        }
+
+        button {
+            margin: 20px 10px 0 0;
+            padding: 10px 20px;
+            background-color: #4287f5;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3270d0;
+        }
+    </style>
+</head>
+<body>
+    <div id="surveyForm">
+        <h1>Customer Survey Form</h1>
+        <div class="row">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <div class="row">
+            <label>In this first time you are using our products and service?</label>
+            <input type="radio" id="interestYes1" name="interest1" value="Yes">
+            <label for="interestYes1">Yes</label>
+            <input type="radio" id="interestNo1" name="interest1" value="No">
+            <label for "interestNo1">No</label>
+        </div>
+
+        <div class="row">
+            <label>Would you suggestion to your colleagues and friends?</label>
+            <input type="radio" id="interestYes2" name="interest2" value="Yes">
+            <label for="interestYes2">Yes</label>
+            <input type="radio" id="interestNo2" name="interest2" value="No">
+            <label for="interestNo2">No</label>
+        </div>
+
+        <div class="row">
+            <label>How satisfied are you with your company overall?</label>
+            <input type="radio" id="interestSatisfied" name="interest3" value="Satisfied">
+            <label for="interestSatisfied">Satisfied</label>
+            <input type="radio" id="interestUnsatisfied" name="interest3" value="Unsatisfied">
+            <label for="interestUnsatisfied">Unsatisfied</label>
+            <input type="radio" id="interestUndecided" name="interest3" value="Undecided">
+            <label for="interestUndecided">Undecided</label>
+        </div>
+
+        <div class="row">
+            <label for="description">Description:</label>
+            <textarea id="description" rows="4" required></textarea>
+        </div>
+
+        <div class="row">
+            <button type="button" onclick="submitForm()">Submit</button>
+            <button type="button" onclick="resetForm()">Close</button>
+        </div>
+    </div>
+
+    <div id="popup" class="hidden">
+        <h2>Survey Form Data</h2>
+        <div id="popupContent">
+            <!-- Populated data will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function displayPopup(data) {
+            const popup = document.getElementById('popup');
+            const popupContent = document.getElementById('popupContent');
+            popupContent.innerHTML = data;
+            popup.classList.remove('hidden');
+        }
+
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const interests = document.querySelector('input[name="interest1"]:checked');
+            const description = document.getElementById('description').value;
+
+            if (!name || !email || !interests || !description) {
+                alert('Please fill in all the required fields.');
+            } else {
+                const data = `
+                    Name: ${name}
+                    Email: ${email}
+                    Description: ${description}
+                `;
+                displayPopup(data);
+                resetForm();
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            const interestRadios = document.querySelectorAll('input[name^="interest"]');
+            interestRadios.forEach(radio => {
+                radio.checked = false;
+            });
+            document.getElementById('description').value = '';
+            const popup = document.getElementById('popup');
+            popup.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
